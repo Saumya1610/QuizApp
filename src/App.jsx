@@ -10,14 +10,13 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 //class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white"
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     
     <div >
         <h1 className="neonText">Welcome to the Quiz!!</h1>
         <br/>
-      <Instruction/>
+        <Instruction/>
     </div>
   )
 }
