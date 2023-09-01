@@ -6,8 +6,10 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 const Quiz = () => {
 
-    const [counter, setCounter] = React.useState(60);
-    const initialCounter = 60;
+    const [counter, setCounter] = React.useState(10);
+    const initialCounter = 10;
+
+    const [quizFinished, setQuizFinished] = useState(false);
 
     const resetTimer = () => {
         setCounter(initialCounter);
@@ -15,7 +17,10 @@ const Quiz = () => {
     
     const handleTimerFinish = () => {
         // When the timer finishes, trigger the same logic as clicking the "Next" button
-        onClickNext();
+        if (!quizFinished) {
+          onAnswerSelected();
+          onClickNext();
+        }
     };
     
 
@@ -24,6 +29,9 @@ const Quiz = () => {
       counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
       if (counter === 0) {
         handleTimerFinish();
+      }
+      if (quizFinished) {
+        clearInterval(timer); // Stop the timer when the quiz is finished
       }
     return () => clearInterval(timer);
   }, [counter]);
@@ -58,6 +66,7 @@ const Quiz = () => {
     } else {
       setActiveQuestion(0)
       setShowResult(true)
+      setQuizFinished(true); 
     }
     resetTimer();
 
